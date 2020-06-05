@@ -15,39 +15,65 @@ function populateUFs() {
 populateUFs()
 
 function getCities(event) {
-    const citySelect = document.querySelector("select[name=cityId]");
-    const stateInput = document.querySelector("input[name=state]");
-    const cityInput = document.querySelector("input[name=city]");
-    cityInput.value = "";
+    const stateInput = document.querySelector("input[name=state]")
+    const citySelect = document.querySelector("select[name=city]")
+    citySelect.innerHTML = '<option value>Selecione a cidade</option>'
+    citySelect.disabled = true
 
-    const indexOfSelectedState = event.target.selectedIndex;
-    stateInput.value = event.target.options[indexOfSelectedState].text;
+    const indexOfSelectedState = event.target.selectedIndex
+    stateInput.value = event.target.options[indexOfSelectedState].text
 
     const uf = event.target.value;
-    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`;
+    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`
 
-    citySelect.innerHTML = `<option value"">Selecione a cidade</option>`;
+    citySelect.innerHTML = `<option value"">Selecione a cidade</option>`
 
     fetch(url)
         .then(res => res.json())
         .then(cities => {
             for (city of cities) {
-                citySelect.innerHTML += `<option value="${city.id}">${city.nome}</option>`
+                citySelect.innerHTML += `<option value="${city.nome}">${city.nome}</option>`
             }
             citySelect.disabled = false
         })
 }
 
-function cityInputSelected(event) {
-    const cityInput = document.querySelector("input[name=city]");
-    const indexOfSelectedCity = event.target.selectedIndex;
-    cityInput.value = event.target.options[indexOfSelectedCity].text;
-}
 
 document
     .querySelector("select[name=uf]")
     .addEventListener("change", getCities)
 
-document
-    .querySelector("select[name=cityId]")
-    .addEventListener("change", cityInputSelected)
+
+// Itens de coleta
+
+const itemsToCollect = document.querySelectorAll(".items-grid li")
+
+for (const item of itemsToCollect) {
+    item.addEventListener("click", handleSelectedItem)
+}
+
+const collectedItems = document.querySelector("input[name=items")
+let selectedItems = []
+
+function handleSelectedItem(event) {
+    const itemLi = event.target
+
+    itemLi.classList.toggle("selected")
+
+    const itemId = itemLi.dataset.id
+
+    const alreadySelected = selectedItems.findIndex(item => item === itemId)
+
+    if (alreadySelected >= 0) {
+        const filteredItems = selectedItems.filter(item => {
+            const itemIsDifferent = item != itemId
+            return itemIsDifferent
+        })
+
+        selectedItems = filteredItems
+    } else {
+        selectedItems.push(itemId)
+    }
+
+    collectedItems.value = selectedItems
+}

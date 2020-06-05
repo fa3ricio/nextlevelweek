@@ -18,6 +18,49 @@
     #page-home main {
         align-items: center;
     }
+
+    #page-search-results .cards {
+        grid-template-columns: 1fr;
+    }
+
+    #page-search-results .card img {
+        height: 200px;
+    }
+
+    .items-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    form .field-group {
+        display: block;
+    }
+    form .field-group .field + .field {
+        margin-left: 0;
+    }
+
+}
+
+@media (max-width: 460px) {
+    .items-grid {
+        grid-template-columns: 1fr;
+    }
+    form {
+        padding: 64px 40px;
+    }
+    form button {
+        max-width: 160px;
+        padding: 0 10px;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+
+    #page-search-results header a {
+        max-width: 140px;
+    }
+    #page-search-results header a span {
+        width: 28px;
+    }
+
 }
 
 @media (min-width: 1700px) {
@@ -28,8 +71,12 @@
 
 }
 
+/* Height */
 @media (max-height: 760px) {
     #page-home {
         background-position-y: 100px;
     }
+
 }
+
+
