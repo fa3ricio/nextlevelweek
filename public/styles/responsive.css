@@ -30,10 +30,10 @@
     .items-grid {
         grid-template-columns: 1fr 1fr;
     }
-    form .field-group {
-        display: block;
+    #page-create-point .field-group {
+        flex-direction: column;
     }
-    form .field-group .field + .field {
+    #page-create-point .field-group .field + .field {
         margin-left: 0;
     }
 

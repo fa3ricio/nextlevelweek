@@ -1,29 +1,18 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "layout.html" %}
+
+{% set pageId = "page-create-point" %}
+    
+{% block title %}
     <title>Criar um ponto de coleta</title>
+{% endblock title %}
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/main.css">
+{% block styles %}
     <link rel="stylesheet" href="./styles/create-point.css">
-    <link rel="stylesheet" href="./styles/responsive.css">
+{% endblock styles %}
 
-</head>
-<body>
+{% block content %}
 
-<div id="page-create-point">
-  
-        <header>
-
-            <img src="./assets/logo.svg" alt="Logo Ecoleta">
-            <a href="index.html">
-                <span></span>
-                Voltar para a home
-            </a>
-
-        </header>
+    {% include "partials/page-header.html" %}
 
         <form action="">
 
@@ -32,9 +21,16 @@
             <fieldset>
                 <legend><h2>Dados da entidade</h2></legend>
 
-                <div class="field">
-                    <label for="name">Nome da entidade</label>
-                    <input type="text" name="name" required>
+
+                <div class="field-group">
+                    <div class="field">
+                        <label for="name">Nome da entidade</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="field">
+                        <label for="name">Imagem da entidade</label>
+                        <input type="url" name="image" placeholder="http://" required>
+                    </div>
                 </div>
 
                 <div class="field-group">
@@ -69,7 +65,10 @@
 
             <fieldset>
 
-                <legend><h2>Itens de coleta</h2></legend>
+                <legend>
+                    <h2>Itens de coleta</h2>
+                    <span>Selecione um ou mais itens abaixo</span>
+                </legend>
 
                 <div class="items-grid">
                     <li data-id="1">
@@ -111,9 +110,8 @@
             <button type="submit">Cadastrar ponto de coleta</button>
 
         </form>
-    </div>
+{% endblock content %}
 
-
+{% block scripts %}
     <script src="./scripts/create-point.js"></script>
-</body>
-</html>
+{% endblock scripts %}
