@@ -55,10 +55,18 @@
     }
 
     #page-search-results header a {
-        max-width: 140px;
+        position: absolute;
+        top: 15px;
     }
     #page-search-results header a span {
         width: 28px;
+    }
+
+    #page-search-results .total-results {
+        flex-direction: column;
+    }
+    #page-search-results .total-results h4 {
+        margin-bottom: 40px;
     }
 
 }
