@@ -8,37 +8,78 @@
 
 {% block styles %}
     <link rel="stylesheet" href="./styles/search-results.css">
+    <link rel="stylesheet" href="./styles/button-search.css">
+    <link rel="stylesheet" href="./styles/modal.css">
 {% endblock styles %}
 
 {% block content %}
     {% include "partials/page-header.html" %}
     <main>
-        <h4><strong>2 pontos</strong> encontrados</h4>
-        <div class="cards">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1526665814499-fbdb4394ef3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Colectoria">
-                <h1>Colectoria</h1>
-                <h3>Resíduos Eletônicos, Lâmpadas</h3>
-                <p>
-                    Rio do Sul, Santa Catarina
-                    <br>
-                    Guilherme Gemballa, Jardim América
-                    <br>
-                    Nº 260
-                </p>
+
+        {% if total > 0 %}
+
+            <div class="total-results">
+
+            {% if search %}
+ 
+                <h4><strong>{{ total }} 
+                {% if total == 1 %}
+                    ponto</strong> encontrado para o termo 
+                {%else%} 
+                    pontos</strong> encontrados para o termo 
+                {% endif %}
+                <span>{{ search }}.</span></h4>
+
+            {% else %}
+
+                <h4>Você não digitou o nome de <span>nenhuma cidade</span>.<br>
+                No total existem <strong>{{ total }} pontos</strong> cadastrados.</h4>
+
+            {% endif %}
+
+                    {% include "partials/button-search.html" %} 
+
             </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1528323273322-d81458248d40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=801&q=80" alt="Papersider">
-                <h1>Papersider</h1>
-                <h3>Papéis e Papelão</h3>
-                <p>
-                    Rio do Sul, Santa Catarina
-                    <br>
-                    Guilherme Gemballa, Jardim América
-                    <br>
-                    Nº 260
-                </p>
+
+            <div class="cards">
+
+                {% for place in places %}
+
+                    <div class="card">
+                        <img src="{{ place.image }}">
+                        <h1>{{ place.name }}</h1>
+                        <h3>{{ place.items }}</h3>
+                        <p>
+                            {{ place.state }}, {{ place.city }}
+                            <br>
+                            {{ place.address }}
+                            <br>
+                            {{ place.address2 }}
+                        </p>
+                    </div>
+
+                {% endfor %}
+
             </div>
-        </div>
+
+        {% else %}
+
+            <div class="total-results">
+
+                <h4>Nenhum local encontrado com o termo <span>{{ search }}</span>.</h4>
+                {% include "partials/button-search.html" %} 
+
+            </div>
+
+        {% endif %}
+  
     </main>
 {% endblock content %}
+
+{% block modal %}
+    {% include "partials/modal.html" %}
+{% endblock modal %}
+
+{% block scripts %}
+    <script src="./scripts/button-search.js"></script>
+{% endblock scripts %}

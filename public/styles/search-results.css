@@ -1,12 +1,17 @@
+body {
+    background-color: #ffffff;
+}
+
 body::after {
     content: "";
-    position: fixed;
-    background: #ffffff;
-    top: 260px;
+    position: absolute;
+    background: #f0f0f5;
+    top: 0;
     right: 0;
     left: 0;
     bottom: 0;
     z-index: -1;
+    height: 20rem;
 }
 
 #page-search-results {
@@ -37,14 +42,28 @@ body::after {
     height: 24px;
 }
 
+#page-search-results .total-results {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    margin-bottom: 40px;
+}
+
 main {
     margin: 48px 0;
 }
 
 main h4 {
-    font-weight: nomal;
+    font-weight: 300;
     font-family: Roboto, sans-serif;
     margin-bottom: 32px;
+    margin: 0;
+}
+
+main h4 span {
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 main .cards {

@@ -4,6 +4,7 @@
 
 {% block styles %}
     <link rel="stylesheet" href="./styles/home.css">
+    <link rel="stylesheet" href="./styles/button-search.css">
     <link rel="stylesheet" href="./styles/modal.css">
 {% endblock styles %}
    
@@ -20,10 +21,9 @@
         <main>
             <h1>Seu marketplace de resíduos</h1>
             <p>Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.</p>
-            <a href="#">
-                <span></span>
-                <strong>Pesquisar pontos de coleta</strong> 
-            </a>
+           
+            {% include "partials/button-search.html" %}
+           
         </main>
     </div>
 {% endblock content %}
@@ -33,7 +33,7 @@
 {% endblock modal %}
 
 {% block scripts %}
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/button-search.js"></script>
 {% endblock scripts %}
    
 
